@@ -4,14 +4,14 @@ workflows:
     environment:
       java: 17
     scripts:
-      - name: Set execute permissions recursively
+      - name: Force gradlew to be executable
         script: |
-          find . -type f -name "gradlew" -exec chmod +x {} \;
+          chmod 777 ./gradlew
       - name: Clean project
         script: |
-          ./gradlew clean
+          sh ./gradlew clean
       - name: Build APK Release
         script: |
-          ./gradlew assembleRelease
+          sh ./gradlew assembleRelease
     artifacts:
       - app/build/outputs/**/*.apk
