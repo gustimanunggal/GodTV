@@ -2,14 +2,12 @@ workflows:
   android-build:
     name: Build APK Android
     environment:
-      vars:
-        JAVA_VERSION: 17
       java: 17
     scripts:
-      - name: Set Permission Gradlew
+      - name: Set execute permissions recursively
         script: |
-          chmod +x ./gradlew
-      - name: Clean Project
+          find . -type f -name "gradlew" -exec chmod +x {} \;
+      - name: Clean project
         script: |
           ./gradlew clean
       - name: Build APK Release
@@ -17,7 +15,3 @@ workflows:
           ./gradlew assembleRelease
     artifacts:
       - app/build/outputs/**/*.apk
-    publishing:
-      email:
-        recipients:
-          - gustimanunggalgb@gmail.com
