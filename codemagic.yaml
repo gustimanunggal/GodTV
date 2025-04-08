@@ -5,7 +5,6 @@ workflows:
       vars:
         PACKAGE_NAME: "com.godtv.app"
       java: 17
-      android: 33
     scripts:
       - name: Set Gradlew Permissions
         script: |
