@@ -10,9 +10,6 @@ workflows:
       - name: Set Gradlew Permissions
         script: |
           chmod +x ./gradlew
-      - name: Clean project
-        script: |
-          ./gradlew clean
       - name: Build APK
         script: |
           ./gradlew assembleRelease
@@ -21,4 +18,4 @@ workflows:
     publishing:
       email:
         recipients:
-          - gustimanunggalgb@gmail.com
+          - your-email@example.com
