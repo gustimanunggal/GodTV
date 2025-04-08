@@ -2,19 +2,15 @@ workflows:
   android-workflow:
     name: Build APK Android via HP
     environment:
+      java: 17
       vars:
         PACKAGE_NAME: "com.godtv.app"
-      java: 17
     scripts:
       - name: Set Gradlew Permissions
-        script: |
-          chmod +x ./gradlew
+        script: chmod +x ./gradlew
+      - name: Clean project
+        script: ./gradlew clean
       - name: Build APK
-        script: |
-          ./gradlew assembleRelease
+        script: ./gradlew assembleRelease
     artifacts:
-      - app/build/outputs/apk/release/app-release.apk
-    publishing:
-      email:
-        recipients:
-          - your-email@example.com
+      - build/**/outputs/apk/release/*.apk
