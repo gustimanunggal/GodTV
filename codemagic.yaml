@@ -1,5 +1,30 @@
 workflows:
-    sample-workflow:
-        name: Codemagic Sample Workflow
-        max_build_duration: 120
-        instance_type: mac_mini_m2
+  godtv-android-build:
+    name: GODTV APK Build
+    max_build_duration: 60
+    environment:
+      vars:
+        JAVA_VERSION: 17
+      flutter: stable
+    scripts:
+      - name: Set up environment
+        script: |
+          echo "Using Java version $JAVA_VERSION"
+      - name: Clean project
+        script: |
+          ./gradlew clean
+      - name: Build Debug APK
+        script: |
+          ./gradlew assembleDebug
+      - name: Locate APK
+        script: |
+          ls -R app/build/outputs/apk/debug
+      - name: Done building APK!
+        script: |
+          echo "APK build finished successfully."
+    artifacts:
+      - app/build/outputs/apk/debug/*.apk
+    publishing:
+      email:
+        recipients:
+          - gustimanunggalgb@gmail.com
